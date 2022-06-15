@@ -22,7 +22,8 @@ const getLocationWeather = (lat, lon, cityName) => __awaiter(void 0, void 0, voi
     yield fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
         .then(res => res.json())
         .then(data => {
-        tempHTML.innerText = data.main.temp;
+        let temp = parseInt(data.main.temp);
+        tempHTML.innerText = `${temp}°C`;
         locationHTML.innerText = `${cityName}`;
     })
         .catch(() => {

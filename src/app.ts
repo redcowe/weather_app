@@ -14,13 +14,15 @@ const getLocationWeather = async(lat: number, lon: number, cityName?: string) =>
     await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
             .then(res => res.json())
             .then(data => {
-                tempHTML.innerText = data.main.temp;
+                let temp: number = parseInt(data.main.temp);
+                tempHTML.innerText = `${temp}°C`;
                 locationHTML.innerText = `${cityName}`
             })
             .catch(() => { 
                 alert("An error occured, please try again later");
             })
 }
+
 //Function responsible for getting lon/lat
 const getLocation = async(location: string) => {
     if (location){
