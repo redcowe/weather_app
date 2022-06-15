@@ -1,5 +1,6 @@
 "use strict";
 //For the sake of this project, I'm leaving the API key in the code. Please understand that I don't agree with it.
+//Read more here: https://www.theodinproject.com/lessons/node-path-javascript-weather-app#api-keys-secrets-and-security
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,9 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const API_KEY = '';
+//HTML Element and API key declairations
+const API_KEY = '98fa83c685b411e856370b4f78f371e9';
 const locationHTML = document.getElementById('location');
 const tempHTML = document.getElementById('temp');
+const searchBar = document.getElementById('searchBar');
+const submitButton = document.getElementById('submitButton');
 //Function responsible for getting weather info
 const getLocation = (lat, lon, cityName) => __awaiter(void 0, void 0, void 0, function* () {
     yield fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
@@ -38,11 +42,17 @@ const getLocationStats = (location) => __awaiter(void 0, void 0, void 0, functio
             return;
         })
             .catch(err => {
-            console.log(err);
+            alert("Unable to find location");
         });
     }
     else {
         alert("please enter a valid location");
     }
 });
-getLocationStats("神戸");
+//Prepopulating data
+getLocationStats("Tokyo, Japan");
+//Search function
+submitButton.addEventListener("click", () => {
+    getLocationStats(searchBar.value);
+    searchBar.value = "";
+});

@@ -1,11 +1,15 @@
 //For the sake of this project, I'm leaving the API key in the code. Please understand that I don't agree with it.
+//Read more here: https://www.theodinproject.com/lessons/node-path-javascript-weather-app#api-keys-secrets-and-security
 
-const API_KEY: string = '';
-const locationHTML: any = document.getElementById('location');
-const tempHTML: any = document.getElementById('temp');
+//HTML Element and API key declairations
+const API_KEY: string = '98fa83c685b411e856370b4f78f371e9';
+const locationHTML: HTMLElement = document.getElementById('location')!;
+const tempHTML: HTMLElement = document.getElementById('temp')!;
+const searchBar = document.getElementById('searchBar') as HTMLInputElement;
+const submitButton: HTMLElement = document.getElementById('submitButton')!;
 
 //Function responsible for getting weather info
-const getLocation = async(lat: number, lon: number, cityName: string) => {
+const getLocation = async(lat: number, lon: number, cityName?: string) => {
     await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
             .then(res => res.json())
             .then(data => {
@@ -30,7 +34,7 @@ const getLocationStats = async(location: string) => {
             return;
         })
         .catch(err => {
-            console.log(err);
+            alert("Unable to find location");
         })
     }
     else {
@@ -39,4 +43,13 @@ const getLocationStats = async(location: string) => {
     
 }
 
-getLocationStats("神戸")
+//Prepopulating data
+getLocationStats("Tokyo, Japan");
+
+//Search function
+submitButton.addEventListener("click", () => {    
+     getLocationStats(searchBar.value);
+     searchBar.value = "";
+     console.log('cleared');
+     
+})
