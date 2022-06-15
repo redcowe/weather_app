@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const API_KEY = '98fa83c685b411e856370b4f78f371e9';
+const API_KEY = '';
 const locationHTML = document.getElementById('location');
 const tempHTML = document.getElementById('temp');
 //Function responsible for getting weather info
@@ -45,4 +45,4 @@ const getLocationStats = (location) => __awaiter(void 0, void 0, void 0, functio
         alert("please enter a valid location");
     }
 });
-getLocationStats("Utsunomiya");
+getLocationStats("神戸");

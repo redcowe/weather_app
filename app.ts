@@ -1,6 +1,6 @@
 //For the sake of this project, I'm leaving the API key in the code. Please understand that I don't agree with it.
 
-const API_KEY: string = '98fa83c685b411e856370b4f78f371e9';
+const API_KEY: string = '';
 const locationHTML: any = document.getElementById('location');
 const tempHTML: any = document.getElementById('temp');
 
@@ -39,4 +39,4 @@ const getLocationStats = async(location: string) => {
     
 }
 
-getLocationStats("Utsunomiya")
+getLocationStats("神戸")
