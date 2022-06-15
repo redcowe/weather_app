@@ -4,6 +4,9 @@
 A simple weather app application that uses OpenWeatherMap's free API. The goal of this project was to practice consuming APIs, handling promises, and asynchronous programming concepts. Below the link to OpenWeatherMap's API can be found.
 <br />
 
+<h2>Live Site</h2>
+
+ - <b>https://redcowe.github.io/weather_app/</b>
 
 <h2>Language(s) Used</h2>
 
