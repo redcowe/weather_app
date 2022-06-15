@@ -1,4 +1,5 @@
 "use strict";
+//This is a proof of concept. Just practicing consuming an API.
 //For the sake of this project, I'm leaving the API key in the code. Please understand that I don't agree with it.
 //Read more here: https://www.theodinproject.com/lessons/node-path-javascript-weather-app#api-keys-secrets-and-security
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -16,32 +17,31 @@ const locationHTML = document.getElementById('location');
 const tempHTML = document.getElementById('temp');
 const searchBar = document.getElementById('searchBar');
 const submitButton = document.getElementById('submitButton');
-//Function responsible for getting weather info
-const getLocation = (lat, lon, cityName) => __awaiter(void 0, void 0, void 0, function* () {
+//Function responsible for getting weather info and setting 
+const getLocationWeather = (lat, lon, cityName) => __awaiter(void 0, void 0, void 0, function* () {
     yield fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
         .then(res => res.json())
         .then(data => {
         tempHTML.innerText = data.main.temp;
         locationHTML.innerText = `${cityName}`;
     })
-        .catch(err => {
-        console.log(err);
+        .catch(() => {
+        alert("An error occured, please try again later");
     });
 });
 //Function responsible for getting lon/lat
-const getLocationStats = (location) => __awaiter(void 0, void 0, void 0, function* () {
+const getLocation = (location) => __awaiter(void 0, void 0, void 0, function* () {
     if (location) {
         yield fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${API_KEY}`)
             .then(res => res.json())
             .then(data => {
             const lat = data[0].lat;
             const lon = data[0].lon;
-            console.log(data);
-            let locationName = data[0].name;
-            getLocation(lat, lon, locationName);
-            return;
+            const locationName = data[0].name;
+            //Searching for location
+            getLocationWeather(lat, lon, locationName);
         })
-            .catch(err => {
+            .catch(() => {
             alert("Unable to find location");
         });
     }
@@ -50,9 +50,9 @@ const getLocationStats = (location) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 //Prepopulating data
-getLocationStats("Tokyo, Japan");
+getLocation("Tokyo, Japan");
 //Search function
 submitButton.addEventListener("click", () => {
-    getLocationStats(searchBar.value);
+    getLocation(searchBar.value);
     searchBar.value = "";
 });
